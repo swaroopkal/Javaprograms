@@ -1,0 +1,99 @@
+/* MultiThreading using Runnable interface
+with join() and isAlive().
+join()-method which allows one thread to wait until another thread completes its execution.
+isAlive()-checks thread is running or not,if it is running returns true otherwise returns false
+*/
+import java.util.*;
+class Demo1 implements Runnable 
+{
+	public void run()
+	{
+		try
+		{
+			System.out.println("banking activity started");
+			Scanner sc=new Scanner(System.in);
+			System.out.println("enter acc_no");
+			int an=sc.nextInt();
+			System.out.println("enter password");
+			int pw=sc.nextInt();
+			Thread.sleep(3000);
+			System.out.println("collect your money");
+			System.out.println("banking activity complected");
+		}
+		catch (Exception e)
+		{
+			System.out.println("exception handled");
+		}
+	}
+}
+class Demo2 implements Runnable
+{
+	public void run()
+	{
+		try
+		{
+			System.out.println("Number printing started");
+			for(int i=1;i<=5;i++)
+			{
+				System.out.println(i);
+				Thread.sleep(3000);
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("Exception Handled");
+		}
+	}
+}
+class Demo3 implements Runnable
+{
+	public void run()
+	{
+		try
+		{
+			System.out.println("Char printing strated");
+			for(int i=65;i<=70;i++)
+			{
+				System.out.println((char)i);
+				Thread.sleep(3000);
+			}
+			System.out.println("Char printing complected");
+		}
+		catch (Exception e)
+		{
+			System.out.println("Exception hnadled");
+		}
+	}
+}
+class LaunchThr3
+{
+	public static void main(String args[])throws Exception
+	{
+		System.out.println("main method execution started");
+		Demo1 d1=new Demo1();
+		Demo2 d2=new Demo2();
+		Demo3 d3=new Demo3();
+		
+		Thread t1=new Thread(d1);
+		Thread t2=new Thread(d2);
+		Thread t3=new Thread(d3);
+
+		System.out.println(t1.isAlive());//false
+		System.out.println(t2.isAlive());//false
+		System.out.println(t3.isAlive());//false
+
+		t1.start();
+		t2.start();
+		t3.start();
+
+		System.out.println(t1.isAlive());//true
+		System.out.println(t2.isAlive());//true
+		System.out.println(t3.isAlive());//true
+
+		t1.join();
+		t2.join();
+		t3.join();
+
+		System.out.println("main method execution complement");
+	}
+}
