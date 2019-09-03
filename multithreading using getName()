@@ -1,0 +1,90 @@
+/* Multithreading using Thread class and getName() and setName()*/
+import java.util.*;
+class Demo extends Thread 
+{
+	public void run()
+	{
+		if(getName().equals("Bank"))
+		{
+			banking();
+		}
+		else if(getName().equals("Num"))
+		{
+				numPrint();
+		}
+		else
+		{
+			charPrint();
+		}
+	}
+	void banking()
+	{
+		try
+		{
+			System.out.println("Baking activity started");
+			Scanner sc=new Scanner(System.in);
+			System.out.println("Enter acc_no");
+			int an=sc.nextInt();
+			System.out.println("Enter password");
+			int pw=sc.nextInt();
+			Thread.sleep(3000);
+			System.out.println("collect your money");
+			System.out.println("banking activity completed");
+		}
+		catch (Exception e)
+		{
+			System.out.println("Exception handled");
+		}
+	}
+	void numPrint()
+	{
+		try
+		{
+			System.out.println("Number printing Started");
+			for(int i=1;i<=5;i++)
+			{
+				System.out.println(i);
+				Thread.sleep(3000);
+			}
+			System.out.println("Number printing completed");
+		}
+		catch (Exception e)
+		{
+			System.out.println("Exception handled");
+		}
+	}
+	void charPrint()
+	{
+		try
+		{
+			System.out.println("Char printing started");
+			for(int i=65;i<=70;i++)
+			{
+				System.out.println((char)i);
+				Thread.sleep(3000);
+			}
+			System.out.println("char printing completed");
+		}
+		catch (Exception e)
+		{
+			System.out.println("Exception handled");
+		}
+	}
+}
+class LaunchThr4
+{
+	public static void main(String args[])
+	{
+		Demo d1=new Demo();
+		Demo d2=new Demo();
+		Demo d3=new Demo();
+
+		d1.setName("Bank");
+		d2.setName("Num");
+		d3.setName("Char");
+
+		d1.start();
+		d2.start();
+		d3.start();
+	}
+}
